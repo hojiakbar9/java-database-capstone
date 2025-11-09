@@ -30,7 +30,7 @@ public class Doctor {
 //      - The @NotNull annotation ensures that the doctor's name is required.
 //      - The @Size(min = 3, max = 100) annotation ensures that the name length is between 3 and 100 characters. 
 //      - Provides validation for correct input and user experience.
-    @NotNull
+    @NotNull(message = "name cannot be null")
     @Size(min = 3, max =100)
     private String name;
 
@@ -40,7 +40,7 @@ public class Doctor {
 //      - Represents the medical specialty of the doctor.
 //      - The @NotNull annotation ensures that a specialty must be provided.
 //      - The @Size(min = 3, max = 50) annotation ensures that the specialty name is between 3 and 50 characters long.
-    @NotNull
+    @NotNull(message = "speciality cannot be null")
     @Size(min=3, max=50)
     private String speciality;
 // 4. 'email' field:
@@ -49,7 +49,7 @@ public class Doctor {
 //      - Represents the doctor's email address.
 //      - The @NotNull annotation ensures that an email address is required.
 //      - The @Email annotation validates that the email address follows a valid email format (e.g., doctor@example.com).
-    @NotNull
+    @NotNull(message = "email cannot be null")
     @Email
     private String email;
 // 5. 'password' field:
@@ -68,7 +68,7 @@ public class Doctor {
 //      - Represents the doctor's phone number.
 //      - The @NotNull annotation ensures that a phone number must be provided.
 //      - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone number must be exactly 10 digits long.
-    @NotNull
+    @NotNull(message = "phone number cannot be null")
     @Pattern(regexp = "^[0-9]{10}$")
     private String phone;
 // 7. 'availableTimes' field:

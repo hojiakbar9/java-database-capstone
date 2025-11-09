@@ -32,7 +32,7 @@ public class Appointment {
 //      - The @ManyToOne annotation defines the relationship, indicating many appointments can be linked to one doctor.
 //      - The @NotNull annotation ensures that an appointment must be associated with a doctor when created.
     @ManyToOne
-    @NotNull
+    @NotNull(message = "doctor must me provided")
     private Doctor doctor;
 // 3. 'patient' field:
 //    - Type: private Patient
@@ -41,7 +41,7 @@ public class Appointment {
 //      - The @ManyToOne annotation defines the relationship, indicating many appointments can be linked to one patient.
 //      - The @NotNull annotation ensures that an appointment must be associated with a patient when created.
     @ManyToOne
-    @NotNull
+    @NotNull(message = "patient must be provided")
     private Patient patient;
 
 // 4. 'appointmentTime' field:
@@ -50,7 +50,7 @@ public class Appointment {
 //      - Represents the date and time when the appointment is scheduled to occur.
 //      - The @Future annotation ensures that the appointment time is always in the future when the appointment is created.
 //      - It uses LocalDateTime, which includes both the date and time for the appointment.
-    @Future
+    @Future(message = "appointment time must be in the future")
     private LocalDateTime appointmentTime;
 // 5. 'status' field:
 //    - Type: private int
@@ -59,7 +59,7 @@ public class Appointment {
 //        - 0 means the appointment is scheduled.
 //        - 1 means the appointment has been completed.
 //      - The @NotNull annotation ensures that the status field is not null.
-    @NotNull
+    @NotNull(message = "status cannot be null")
     private int status;
 // 6. 'getEndTime' method:
 //    - Type: private LocalDateTime

@@ -19,7 +19,7 @@ public class Prescription {
 //      - Represents the unique identifier for each prescription.
 //      - The @Id annotation marks it as the primary key in the MongoDB collection.
 //      - The id is of type String, which is commonly used for MongoDB's ObjectId as it stores IDs as strings in the database.
-    @NotNull
+    @NotNull(message = "name cannot be null")
     @Size(min = 3, max=100)
     private String patientName;
 // 2. 'patientName' field:
@@ -28,14 +28,14 @@ public class Prescription {
 //      - Represents the name of the patient receiving the prescription.
 //      - The @NotNull annotation ensures that the patient name is required.
 //      - The @Size(min = 3, max = 100) annotation ensures that the name length is between 3 and 100 characters, ensuring a reasonable name length.
-    @NotNull
+    @NotNull(message = "appointment id cannot be null")
     private Long appointmentId;
 // 3. 'appointmentId' field:
 //    - Type: private Long
 //    - Description:
 //      - Represents the ID of the associated appointment where the prescription was given.
 //      - The @NotNull annotation ensures that the appointment ID is required for the prescription.
-    @NotNull
+    @NotNull(message = "medication cannot be null")
     @Size(min = 3, max= 100)
     private String medication;
 // 4. 'medication' field:
@@ -44,7 +44,7 @@ public class Prescription {
 //      - Represents the medication prescribed to the patient.
 //      - The @NotNull annotation ensures that the medication name is required.
 //      - The @Size(min = 3, max = 100) annotation ensures that the medication name is between 3 and 100 characters, which ensures meaningful medication names.
-    @NotNull
+    @NotNull(message = "dosage cannot be null")
     private String dosage;
 // 5. 'dosage' field:
 //    - Type: private String

@@ -31,7 +31,7 @@ public class Patient {
 //      - The @NotNull annotation ensures that the patient's name is required.
 //      - The @Size(min = 3, max = 100) annotation ensures that the name length is between 3 and 100 characters. 
 //      - Provides validation for correct input and user experience.
-    @NotNull
+    @NotNull(message = "name cannot be null")
     @Size(min = 3, max = 100)
     private String name;
 // 3. 'email' field:
@@ -40,7 +40,7 @@ public class Patient {
 //      - Represents the patient's email address.
 //      - The @NotNull annotation ensures that an email address must be provided.
 //      - The @Email annotation validates that the email address follows a valid email format (e.g., patient@example.com).
-    @NotNull
+    @NotNull(message = "email cannot be null")
     @Email
     private String email;
 // 4. 'password' field:
@@ -49,7 +49,7 @@ public class Patient {
 //      - Represents the patient's password for login authentication.
 //      - The @NotNull annotation ensures that a password must be provided.
 //      - The @Size(min = 6) annotation ensures that the password must be at least 6 characters long.
-    @NotNull
+    @NotNull(message = "password cannot be null")
     @Size(min = 6)
     private String password;
 // 5. 'phone' field:
@@ -58,7 +58,7 @@ public class Patient {
 //      - Represents the patient's phone number.
 //      - The @NotNull annotation ensures that a phone number must be provided.
 //      - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone number must be exactly 10 digits long.
-    @NotNull
+    @NotNull(message = "phone number cannot be null")
     @Pattern(regexp = "^[0-9]{10}$")
     private String phone;
 // 6. 'address' field:
@@ -67,7 +67,7 @@ public class Patient {
 //      - Represents the patient's address.
 //      - The @NotNull annotation ensures that the address must be provided.
 //      - The @Size(max = 255) annotation ensures that the address does not exceed 255 characters in length, providing validation for the address input.
-    @NotNull
+    @NotNull(message = "address cannot be null")
     @Size(max = 255)
     private String address;
 
