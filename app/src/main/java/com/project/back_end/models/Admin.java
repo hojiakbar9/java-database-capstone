@@ -1,12 +1,13 @@
 package com.project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 // @Entity annotation:
 //    - Marks the class as a JPA entity, which means it represents a table in the database.
 //    - It is required for persistence frameworks like Hibernate to map the class to a database table.
-@Entity(name = "admins")
+@Entity()
 public class Admin {
 
 // 1. 'id' field:
@@ -17,7 +18,6 @@ public class Admin {
 //      - It is the primary key of the entity, identified by @Id annotation.
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column
 private Long id;
 
     // 2. 'username' field:
@@ -26,17 +26,17 @@ private Long id;
 //      - Represents the username of the admin.
 //      - Used to log into the system.
 //      - @NotNull validation ensures that this field cannot be null when creating or updating an Admin.
-@Column
-@NotNull(message = "username cannot be empty")
+@NotNull
 private String username;
+
 // 3. 'password' field:
 //    - Type: private String
 //    - Description: 
 //      - Represents the password of the admin for authentication.
 //      - The field is marked with @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) to prevent the password from being exposed in JSON responses.
 //      - @NotNull validation ensures the password cannot be null when creating or updating an Admin.
-@Column
-@NotNull(message = "password cannot be empty")
+@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+@NotNull
     private String password;
 // 4. Constructor(s):
 //    - A no-argument constructor is implicitly provided, required by JPA for entity creation.
