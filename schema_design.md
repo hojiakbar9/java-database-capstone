@@ -52,54 +52,69 @@
 
 ## MongoDB Collection Design
 
-### Collection clinical_records
-This collection is designed to hold the medical notes, prescriptions, and any uploaded documents associated with an appointment. 
-This data is often unstructured (notes) or has an evolving structure (prescriptions, test results).
+### Collection prescriptions
+This collection is designed for the flexible, potentially rich, and frequently updated data associated with a prescription, 
+allowing for nested documents and arrays for complex drug regimens and history.
 
 ```json
 {
   "_id": "ObjectId('655a9c9f6a7d8e9f01234567')",
-  "appointment_id": 12345, // Reference to the MySQL appointments table
+  "prescription_uuid": "PRX-20251107-001234", // Unique identifier for external tracking
+  "appointment_id": 12345, // Reference to the MySQL appointments table (core link)
   "patient_id": 501,       // Reference to the MySQL patients table
   "doctor_id": 105,        // Reference to the MySQL doctors table
-  "record_type": "Consultation_Notes", // 'Consultation_Notes', 'Lab_Results', 'Prescription', 'Procedure_Summary'
-  "created_at": "ISODate('2025-11-20T10:30:00Z')",
-  "last_updated": "ISODate('2025-11-20T11:45:00Z')",
-  "doctor_notes": {
-    "chief_complaint": "Persistent headache for 3 days.",
-    "hpi": "Symptoms began gradually. No fever. Denies trauma.",
-    "assessment": "Migraine without aura, likely stress-induced.",
-    "plan": "Hydration, rest, and new prescription.",
-    "tags": ["headache", "migraine", "acute"]
-  },
-  "prescription": [
+  "date_prescribed": "ISODate('2025-11-07T14:00:00Z')",
+  "status": "Active", // e.g., 'Active', 'Filled', 'Expired', 'Cancelled'
+
+  "medications": [ // Array to handle multi-drug prescriptions or complex regimens
     {
-      "medication_name": "Ibuprofen",
-      "dosage": "400mg",
-      "frequency": "Every 6 hours as needed (PRN)",
-      "duration": "7 days",
+      "drug_name": "Amoxicillin",
+      "strength": "500mg",
+      "form": "Capsule",
+      "quantity_dispensed": 21,
       "refill_count": 0,
-      "dispensed_on": "2025-11-20"
+      "instructions": {
+        "sig": "Take one capsule by mouth three times daily.",
+        "duration_days": 7,
+        "notes": "Take with food to avoid stomach upset."
+      },
+      "tags": ["antibiotic", "oral"]
     },
     {
-      "medication_name": "Sumatriptan",
-      "dosage": "50mg",
-      "frequency": "Take at onset of migraine",
-      "duration": "PRN",
-      "refill_count": 1,
-      "dispensed_on": "2025-11-20"
+      "drug_name": "Cetirizine",
+      "strength": "10mg",
+      "form": "Tablet",
+      "quantity_dispensed": 30,
+      "refill_count": 3,
+      "instructions": {
+        "sig": "Take one tablet once daily at bedtime.",
+        "duration_days": 30,
+        "notes": ""
+      },
+      "tags": ["antihistamine", "chronic"]
     }
   ],
-  "attachments": [
+
+  "pharmacy_details": {
+    "pharmacy_name": "CVS Pharmacy - Main Street",
+    "npi": "1234567890",
+    "contact_phone": "555-123-4567",
+    "delivery_required": false
+  },
+
+  "history": [ // Tracking refills and status changes
     {
-      "file_name": "MRI_Scan_2025_11_19.pdf",
-      "storage_path": "/uploads/files/105/501/mri_112025.pdf",
-      "file_size_kb": 5120
+      "event": "Prescription Sent to Pharmacy",
+      "timestamp": "ISODate('2025-11-07T14:05:00Z')"
+    },
+    {
+      "event": "Refill Request Approved (Refill 1)",
+      "timestamp": "ISODate('2025-12-07T09:15:00Z')"
     }
   ],
   "metadata": {
-    "is_sensitive": true,
-    "version": "1.1"
+    "version": "1.0.1",
+    "external_system_id": "EPCS-98765" // Link to an e-Prescribing system ID
   }
 }
 ```
