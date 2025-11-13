@@ -1,5 +1,9 @@
 package com.project.back_end.mvc;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
 public class DashboardController {
 
 // 1. Set Up the MVC Controller Class:
@@ -9,7 +13,19 @@ public class DashboardController {
 
 // 2. Autowire the Shared Service:
 //    - Inject the common `Service` class, which provides the token validation logic used to authorize access to dashboards.
+@GetMapping("/")
+    public String getHome(){
+    return "index";
+}
 
+@GetMapping("/admin")
+    public String adminDashboard(){
+    return "admin/adminDashboard";
+}
+@GetMapping("/doctor")
+    public String doctorDashboard(){
+        return "doctor/doctorDashboard";
+    }
 
 // 3. Define the `adminDashboard` Method:
 //    - Handles HTTP GET requests to `/adminDashboard/{token}`.
