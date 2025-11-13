@@ -110,35 +110,31 @@ and triggers modal-based login functionality.
     <title>Select role</title>
     <link rel="icon" href="./assets/images/logo/logo.png" />
     <link rel="stylesheet" href="./assets/css/index.css" />
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="./js/util.js" defer></script>
     <script src="./js/render.js" defer></script>
     <script src="./js/components/header.js" defer></script>
     <script src="./js/components/footer.js" defer></script>
   </head>
   <body>
-    <main>
-      <div class="container">
-        <div class="wrapper">
-          <div class="header"></div>
-          <main class="main-content">
-            <h2>Select Your Role</h2>
-            <button onclick="setRole('admin')" id="admin-button">Admin</button>
-            <button onclick="setRole('doctor')" id="doctor-button">
-              Doctor
-            </button>
-            <button onclick="setRole('patient')" id="patient-button">
-              Patient
-            </button>
-          </main>
-          <div id="modal" class="modal">
-            <button id="closeModal"></button>
-            <div id="modalBody"></div>
-          </div>
-          <div class="footer"></div>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header"></div>
+        <main class="main-content">
+          <h2>Select Your Role</h2>
+          <button onclick="setRole('admin')" id="admin-button">Admin</button>
+          <button onclick="setRole('doctor')" id="doctor-button">Doctor</button>
+          <button onclick="setRole('patient')" id="patient-button">
+            Patient
+          </button>
+        </main>
+        <div class="footer"></div>
+        <div id="modal" class="modal">
+          <button id="closeModal"></button>
+          <div id="modal-body"></div>
         </div>
       </div>
-    </main>
+    </div>
     <script type="module" src="./js/services/index.js" defer></script>
   </body>
 </html>
