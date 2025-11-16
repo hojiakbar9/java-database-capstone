@@ -1,9 +1,11 @@
+// doctorCard.js — reusable doctor card renderer
+
 import { deleteDoctor } from '../services/doctorServices.js';
 import { showBookingOverlay } from '../loggedPatient.js';
 import { fetchPatientDetails } from '../services/patientServices.js';
 
-export function createDoctorCard(doctor){
-   const role = localStorage.getItem("userRole");
+export function createDoctorCard(doctor) {
+  const role = localStorage.getItem("userRole");
   const token = localStorage.getItem("token");
 
   // === Main Card Container ===
@@ -117,6 +119,9 @@ export function createDoctorCard(doctor){
 
   return card;
 }
+
+
+
 /*
 Import the overlay function for booking appointments from loggedPatient.js
 

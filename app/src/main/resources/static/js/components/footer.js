@@ -1,5 +1,8 @@
-export function renderFooter(){
-  const footerDiv = document.getElementById("footer");
+// footer.js — reusable static footer renderer
+
+export function renderFooter() {
+  const footerDiv = document.getElementById("footer-container");
+
   if (!footerDiv) return;
 
   footerDiv.innerHTML = `
@@ -45,7 +48,11 @@ export function renderFooter(){
   `;
 }
 
+// Automatically render footer on page load
 renderFooter();
+
+
+
 
 /*
   Function to render the footer content into the page

@@ -1,23 +1,26 @@
-export function renderHeader(){
-  const headerDiv = document.getElementById("header");
+// header.js — dynamic header renderer for all pages
 
-   if (window.location.pathname.endsWith("/")) {
-      localStorage.removeItem("userRole");
-      localStorage.removeItem("token");
-       headerDiv.innerHTML = `
-           <header class="header">
-             <div class="logo-section">
-               <img src="../assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
-               <span class="logo-title">Hospital CMS</span>
-             </div>
-           </header>`;
-         return;
-    }
+export function renderHeader() {
+  const headerDiv = document.getElementById("header-container");
 
-    const role = localStorage.getItem('userRole');
-    const token = localStorage.getItem('token');
-    
-    let headerContent = `
+  // If on root/index page, show minimal header
+  if (window.location.pathname.endsWith("/") || window.location.pathname.endsWith("/index.html")) {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("token");
+    headerDiv.innerHTML = `
+      <header class="header">
+        <div class="logo-section">
+          <img src="../assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
+          <span class="logo-title">Hospital CMS</span>
+        </div>
+      </header>`;
+    return;
+  }
+
+  const role = localStorage.getItem("userRole");
+  const token = localStorage.getItem("token");
+
+  let headerContent = `
     <header class="header">
       <div class="logo-section">
         <img src="../assets/images/logo/logo.png" alt="Hospital CRM Logo" class="logo-img">
@@ -25,15 +28,16 @@ export function renderHeader(){
       </div>
       <nav class="header-nav">`;
 
-    if ((role === "loggedPatient" || role === "admin" || role === "doctor") && !token) {
-      localStorage.removeItem("userRole");
-      localStorage.removeItem("token");
-      alert("Session expired or invalid login. Please log in again.");
-      window.location.href = "/";
-      return;
+  // Handle invalid sessions
+  if ((role === "loggedPatient" || role === "admin" || role === "doctor") && !token) {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("token");
+    alert("Session expired or invalid login. Please log in again.");
+    window.location.href = "/";
+    return;
   }
 
-    // Role-specific header actions
+  // Role-specific header actions
   if (role === "admin") {
     headerContent += `
       <button id="addDocBtn" class="adminBtn" onclick="openModal('addDoctor')">Add Doctor</button>
@@ -52,7 +56,8 @@ export function renderHeader(){
       <button id="patientAppointments" class="adminBtn" onclick="window.location.href='/pages/patientAppointments.html'">Appointments</button>
       <a href="#" id="patientLogout">Logout</a>`;
   }
-// Close nav + header
+
+  // Close nav + header
   headerContent += `</nav></header>`;
 
   // Render to DOM
@@ -61,6 +66,7 @@ export function renderHeader(){
   // Add behavior for dynamic buttons
   attachHeaderButtonListeners();
 }
+
 function attachHeaderButtonListeners() {
   const patientLogin = document.getElementById("patientLogin");
   const patientSignup = document.getElementById("patientSignup");
@@ -105,6 +111,16 @@ function logoutPatient() {
 
 // Immediately render the header
 renderHeader();
+
+
+
+
+
+
+
+
+
+
 
 /*
   Step-by-Step Explanation of Header Section Rendering
